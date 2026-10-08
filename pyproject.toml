@@ -1,0 +1,20 @@
+[project]
+name = "screenpipe-pi-healer"
+version = "0.1.0"
+description = "Launch-time self-healing overlay for Screenpipe Pi gpt-6-luna Responses compatibility"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "le-dawg" }
+]
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tools/screenpipe-pi-healer"]

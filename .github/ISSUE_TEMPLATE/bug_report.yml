@@ -1,0 +1,26 @@
+name: Bug report
+description: Report a drift, anchor miss, or failed repair
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What broke?
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Relevant healer log
+      description: Paste the relevant lines from `~/Library/Logs/screenpipe-pi-healer.log`
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Screenpipe / Pi runtime versions or installed build fingerprint
+    validations:
+      required: true

@@ -1,0 +1,36 @@
+{
+  "name": "screenpipe-pi-healer",
+  "version": "0.1.0",
+  "target_file": "/Users/thedawgctor/.screenpipe/pi-agent/node_modules/@earendil-works/pi-coding-agent/dist/core/provider-composer.js",
+  "heal_log": "/Users/thedawgctor/Library/Logs/screenpipe-pi-healer.log",
+  "verification": {
+    "bun_path": "/Applications/screenpipe.app/Contents/MacOS/bun",
+    "models_path": "/Users/thedawgctor/.screenpipe/pi-config/models.json",
+    "auth_path": "/Users/thedawgctor/.screenpipe/pi-config/auth.json",
+    "expected_provider": "custom",
+    "expected_model": "gpt-6-luna",
+    "expected_api": "openai-responses",
+    "expected_reasoning": true
+  },
+  "patch": {
+    "anchor_line": "    const api = definition.api ?? providerConfig.api ?? defaults?.api;",
+    "insert_after_anchor": [
+      "    const forcedGpt6Responses = providerId === \"custom\" && definition.id === \"gpt-6-luna\";",
+      "    const effectiveApi = forcedGpt6Responses ? \"openai-responses\" : api;"
+    ],
+    "replace_api_line": {
+      "from": "        api: api,",
+      "to": "        api: effectiveApi,"
+    },
+    "replace_reasoning_line": {
+      "from": "        reasoning: definition.reasoning ?? false,",
+      "to": "        reasoning: forcedGpt6Responses ? true : (definition.reasoning ?? false),"
+    },
+    "expected_fragment": [
+      "const forcedGpt6Responses = providerId === \"custom\" && definition.id === \"gpt-6-luna\";",
+      "const effectiveApi = forcedGpt6Responses ? \"openai-responses\" : api;",
+      "api: effectiveApi,",
+      "reasoning: forcedGpt6Responses ? true : (definition.reasoning ?? false),"
+    ]
+  }
+}
