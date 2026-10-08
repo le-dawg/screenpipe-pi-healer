@@ -1,5 +1,10 @@
 # Screenpipe Pi Healer
 
+[![CI](https://github.com/le-dawg/screenpipe-pi-healer/actions/workflows/ci.yml/badge.svg)](https://github.com/le-dawg/screenpipe-pi-healer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/le-dawg/screenpipe-pi-healer?style=social)](https://github.com/le-dawg/screenpipe-pi-healer/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/le-dawg/screenpipe-pi-healer)](https://github.com/le-dawg/screenpipe-pi-healer/issues)
+
 Silent, launch-time self-healing for a very specific but nasty local compatibility break:
 
 - **Screenpipe desktop**
@@ -9,6 +14,12 @@ Silent, launch-time self-healing for a very specific but nasty local compatibili
 - **Apple Silicon efficiency first**
 
 No Screenpipe fork. No daemon. No polling. No app-bundle surgery.
+
+## TL;DR
+
+If Screenpipe updates and quietly breaks your working `gpt-6-luna` Pi path again, this project can detect the drift the next time you launch Screenpipe, repair the local runtime patch silently, verify the repaired state cheaply, and get out of the way.
+
+That is the whole point.
 
 ## Why this exists
 
@@ -46,6 +57,8 @@ Bad things do not:
 - undocumented binary hacks
 - secrets in artifacts
 - “works on my machine” handwaving
+
+If you like small compatibility overlays, robust breadcrumbs, and brutally pragmatic local recovery tooling, this is a good place to help.
 
 ## Quick Start
 
@@ -91,6 +104,15 @@ tools/screenpipe-pi-healer/screenpipe-pi-heal.sh --check
 tools/screenpipe-pi-healer/screenpipe-pi-heal.sh --repair
 tools/screenpipe-pi-healer/screenpipe-pi-heal.sh --install-launcher
 ```
+
+## What success looks like
+
+A healthy launch means:
+
+1. the local Pi runtime already contains the required patch, or the healer reapplies it
+2. `custom/gpt-6-luna` resolves onto `openai-responses`
+3. Screenpipe launches normally
+4. no background daemon remains running just to babysit the fix
 
 ## How it works
 
@@ -141,6 +163,14 @@ Primary log:
 
 - `~/Library/Logs/screenpipe-pi-healer.log`
 
+There are also intentional breadcrumbs in:
+
+1. the patch manifest
+2. verifier exit codes
+3. fixture-based tests
+4. compatibility notes
+5. troubleshooting docs
+
 ## Compatibility
 
 See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
@@ -156,6 +186,12 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Upstream relationship
+
+This project is intentionally **not** a Screenpipe fork.
+
+It is a local compatibility overlay for one specific runtime path. If Screenpipe absorbs a proper upstream fix, this project should get smaller or disappear.
 
 ## License
 
